@@ -1,90 +1,53 @@
-# 💸 Student Finance Tracker
+# PocketPal
 
-A simple and beginner-friendly **Student Finance Tracker** built using **HTML, CSS, and JavaScript**. It helps students manage their monthly budget by tracking expenses and calculating the remaining balance.
+PocketPal is a polished, privacy-first personal finance Progressive Web App built with vanilla HTML, CSS, and JavaScript. It runs entirely in the browser: no account, server, build process, or tracking required.
 
-## ✨ Features
+## Features
 
-- 💰 Set a monthly budget
-- ➕ Add expenses with name and amount
-- 📊 View total budget, total spent, and remaining balance
-- 🗑️ Delete expenses and automatically update totals
-- 🎨 Clean and responsive user interface
-- 🚀 No frameworks or external libraries required
+- Income and expense tracking with editing, deletion, search, category/month/type filters, and period views
+- Premium mobile-first dashboard: balance, budget, safe daily spending, savings, and recent activity
+- Savings goals with progress tracking, streaks, and achievement badges
+- Chart.js insights: category breakdown, income vs expenses, and seven-day spending trend
+- Dark mode, currency selection (INR/USD/EUR/GBP), daily/monthly budget settings, and notification preference
+- CSV transaction exports and JSON backup imports
+- LocalStorage persistence and a service worker for offline caching after first visit
+- Installable PWA manifest with a custom vector app icon
 
-## 📁 Project Structure
+## Screenshots
 
-```
-student-finance-tracker/
-│
+Open `index.html` in a browser to view the responsive dashboard, activity, insights, goals, and profile screens. The UI is intentionally designed to adapt from phone to desktop without separate builds.
+
+## Run locally
+
+No installation is necessary. Double-click `index.html`, or serve this folder with any static file server for the complete PWA experience. Chart.js and Inter load from their CDN; the app itself remains fully usable with locally stored data.
+
+> Service workers require `https` or `localhost`, so offline installability is available when hosted (including GitHub Pages), rather than from a `file://` URL.
+
+## Deploy to GitHub Pages
+
+1. Push these files to a GitHub repository.
+2. In **Settings → Pages**, select **Deploy from a branch**.
+3. Choose your deployment branch and the repository root, then save.
+4. Open the generated GitHub Pages URL and use your browser’s install option to add PocketPal to your device.
+
+## Folder structure
+
+```text
+PocketPal/
 ├── index.html
 ├── style.css
 ├── script.js
-└── README.md
+├── manifest.json
+├── service-worker.js
+└── assets/
+    └── icons/
+        └── icon.svg
 ```
 
-## 🛠️ Technologies Used
+## Data and privacy
 
-- HTML5
-- CSS3
-- JavaScript (ES6)
+All financial data is stored only in your browser’s LocalStorage. Export a CSV of transactions from Profile, or import a JSON backup created from LocalStorage-compatible PocketPal data. Clearing browser site data will erase local records.
 
-## 🚀 Getting Started
+## License
 
-1. Clone the repository:
-
-```bash
-git clone https://github.com/your-username/student-finance-tracker.git
-```
-
-2. Navigate to the project folder:
-
-```bash
-cd student-finance-tracker
-```
-
-3. Open `index.html` in your web browser.
-
-No installation or dependencies are required.
-
-## 📸 Preview
-
-The application includes:
-
-- Budget input section
-- Expense entry form
-- Budget summary cards
-- Expense list with delete functionality
-
-## 🎯 Future Improvements
-
-- 💾 Save data using Local Storage
-- 📂 Expense categories
-- 📅 Monthly expense history
-- 📈 Charts and analytics
-- 🌙 Dark mode
-- 📱 Better mobile responsiveness
-- 📷 Receipt scanner
-- 🤖 AI-powered spending insights
-
-## 🤝 Contributing
-
-Contributions are welcome!
-
-If you'd like to improve this project:
-
-1. Fork the repository
-2. Create a new branch
-3. Commit your changes
-4. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 👨‍💻 Author
-
-Developed as a beginner-friendly web development project using HTML, CSS, and JavaScript.
-
----
-
-⭐ If you found this project helpful, consider giving it a star on GitHub!
+MIT License. Use, adapt, and ship it freely.

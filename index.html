@@ -1,52 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Finance Tracker</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#6366f1">
+  <meta name="description" content="PocketPal, your private personal finance companion.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>PocketPal — Personal finance, made personal</title>
 </head>
 <body>
+  <div class="app-shell" id="appShell">
+    <main class="main-content">
+      <section class="screen active" id="home-screen" aria-labelledby="home-title">
+        <header class="topbar"><div><p class="eyebrow" id="greeting">Good morning</p><h1 id="home-title">Alex <span>✦</span></h1></div><button class="avatar" id="profileShortcut" aria-label="Open profile">AP</button></header>
+        <article class="balance-card"><div class="balance-orb orb-one"></div><div class="balance-orb orb-two"></div><p>Available balance</p><h2 id="availableBalance">₹0</h2><div class="balance-meta"><div><span>↑ Income</span><strong id="incomeTotal">₹0</strong></div><div><span>↓ Expenses</span><strong id="expenseTotal">₹0</strong></div><div><span>◌ Savings</span><strong id="savingsTotal">₹0</strong></div></div></article>
+        <section class="safe-spending"><div class="safe-icon">⌁</div><div><p>Today’s safe spending</p><strong id="dailySafe">₹0</strong><small id="dailyDetail">Set a daily limit in profile</small></div><span class="safe-arrow">→</span></section>
+        <section class="section"><div class="section-head"><h2>Quick actions</h2></div><div class="quick-actions"><button data-action="expense"><i>−</i><span>Expense</span></button><button data-action="income"><i>+</i><span>Income</span></button><button data-action="transfer"><i>↗</i><span>Transfer</span></button><button data-action="goal"><i>◎</i><span>Goals</span></button></div></section>
+        <section class="section budget-section"><div class="section-head"><div><h2>Monthly budget</h2><p id="budgetStatus">Make your plan count</p></div><button class="text-button" id="editBudget">Edit</button></div><div class="budget-ring"><div class="ring"><span id="budgetPercent">0%</span></div><div><strong id="budgetRemaining">₹0 left</strong><p id="budgetCaption">of ₹0 monthly budget</p></div></div></section>
+        <section class="section"><div class="section-head"><h2>Recent activity</h2><button class="text-button" data-nav="transactions">See all</button></div><div id="recentTransactions" class="transaction-list"></div></section>
+      </section>
 
-<div class="container">
+      <section class="screen" id="transactions-screen" aria-labelledby="transactions-title">
+        <header class="page-header"><div><p class="eyebrow">Your money story</p><h1 id="transactions-title">Transactions</h1></div><button class="icon-button" id="filterToggle" aria-label="Toggle filters">☷</button></header>
+        <div class="search-box"><span>⌕</span><input id="transactionSearch" type="search" placeholder="Search transactions" aria-label="Search transactions"></div>
+        <div class="filter-panel" id="filterPanel"><select id="typeFilter" aria-label="Transaction type"><option value="all">All types</option><option value="expense">Expenses</option><option value="income">Income</option></select><select id="categoryFilter" aria-label="Category"><option value="all">All categories</option></select><input id="monthFilter" type="month" aria-label="Filter by month"></div>
+        <div class="period-tabs" role="tablist"><button class="active" data-period="all">All</button><button data-period="day">Daily</button><button data-period="week">Weekly</button><button data-period="month">Monthly</button><button data-period="year">Yearly</button></div>
+        <div id="transactionList" class="transaction-list full-list"></div>
+      </section>
 
-    <h1>💸 Student Finance Tracker</h1>
+      <section class="screen" id="analytics-screen" aria-labelledby="analytics-title">
+        <header class="page-header"><div><p class="eyebrow">Make informed moves</p><h1 id="analytics-title">Analytics</h1></div><select id="analyticsPeriod" aria-label="Analytics period"><option value="month">This month</option><option value="year">This year</option><option value="all">All time</option></select></header>
+        <div class="stat-grid"><article><small>Largest expense</small><strong id="largestExpense">—</strong><span id="largestExpenseName">No expenses yet</span></article><article><small>Average spend</small><strong id="averageSpend">₹0</strong><span>per expense</span></article><article><small>Transactions</small><strong id="transactionCount">0</strong><span>total entries</span></article></div>
+        <article class="chart-card"><div class="section-head"><h2>Category distribution</h2><span class="chart-dot">Expenses</span></div><canvas id="categoryChart" aria-label="Expense category distribution chart"></canvas><div id="categoryLegend" class="chart-legend"></div></article>
+        <article class="chart-card"><div class="section-head"><h2>Income vs expenses</h2><span class="chart-dot green">Monthly</span></div><canvas id="incomeExpenseChart" aria-label="Monthly income versus expense chart"></canvas></article>
+        <article class="chart-card"><div class="section-head"><h2>Daily spending</h2><span class="chart-dot amber">Last 7 days</span></div><canvas id="dailyChart" aria-label="Daily spending chart"></canvas></article>
+      </section>
 
-    <div class="budget-box">
-        <input type="number" id="budgetInput" placeholder="Enter Monthly Budget">
-        <button onclick="setBudget()">Set Budget</button>
-    </div>
+      <section class="screen" id="goals-screen" aria-labelledby="goals-title">
+        <header class="page-header"><div><p class="eyebrow">A little closer each day</p><h1 id="goals-title">Your goals</h1></div><button class="icon-button" id="addGoalButton" aria-label="Add savings goal">+</button></header>
+        <div class="streak-card"><div class="streak-fire">♨</div><div><strong id="streakCount">0 day streak</strong><p>Keep adding to your future</p></div><span class="badge-pill">Saver</span></div>
+        <div id="goalsList" class="goals-list"></div>
+        <section class="achievements"><h2>Achievements</h2><div class="badge-grid"><article class="achievement" id="badgeFirst"><i>✦</i><strong>First step</strong><span>Log a transaction</span></article><article class="achievement" id="badgeBudget"><i>◒</i><strong>Planner</strong><span>Set a budget</span></article><article class="achievement" id="badgeGoal"><i>◎</i><strong>Dreamer</strong><span>Create a goal</span></article></div></section>
+      </section>
 
-    <div class="summary">
-        <div>
-            <h3>Budget</h3>
-            <p id="budget">₹0</p>
-        </div>
-
-        <div>
-            <h3>Spent</h3>
-            <p id="spent">₹0</p>
-        </div>
-
-        <div>
-            <h3>Remaining</h3>
-            <p id="remaining">₹0</p>
-        </div>
-    </div>
-
-    <div class="expense-form">
-        <input type="text" id="expenseName" placeholder="Expense Name">
-        <input type="number" id="expenseAmount" placeholder="Amount">
-        <button onclick="addExpense()">Add Expense</button>
-    </div>
-
-    <h2>Expenses</h2>
-
-    <ul id="expenseList"></ul>
-
-</div>
-
-<script src="script.js"></script>
-
+      <section class="screen" id="profile-screen" aria-labelledby="profile-title">
+        <header class="profile-hero"><div class="avatar large">AP</div><div><p class="eyebrow">PocketPal member</p><h1 id="profile-title">Alex Patel</h1><button class="text-button" id="editName">Edit profile</button></div></header>
+        <section class="settings-group"><h2>Preferences</h2><article class="settings-card"><label for="themeToggle"><span class="setting-icon">◐</span><span><strong>Dark mode</strong><small>Easy on your eyes</small></span><input id="themeToggle" class="switch" type="checkbox" aria-label="Enable dark mode"></label><label for="currencySelect"><span class="setting-icon">₹</span><span><strong>Currency</strong><small>Display preference</small></span><select id="currencySelect" aria-label="Currency"><option value="INR">INR — Indian rupee</option><option value="USD">USD — US dollar</option><option value="EUR">EUR — Euro</option><option value="GBP">GBP — Pound sterling</option></select></label><label for="notificationsToggle"><span class="setting-icon">♧</span><span><strong>Notifications</strong><small>Budget reminders</small></span><input id="notificationsToggle" class="switch" type="checkbox" aria-label="Enable notifications"></label></article></section>
+        <section class="settings-group"><h2>Money plan</h2><article class="settings-card"><button id="budgetSettings"><span class="setting-icon">◒</span><span><strong>Monthly budget</strong><small id="settingsBudget">Not set</small></span><b>›</b></button><button id="dailyLimitSettings"><span class="setting-icon">⌁</span><span><strong>Daily spending limit</strong><small id="settingsDailyLimit">Not set</small></span><b>›</b></button></article></section>
+        <section class="settings-group"><h2>Your data</h2><article class="settings-card"><button id="exportData"><span class="setting-icon">↓</span><span><strong>Export transactions</strong><small>Download as CSV</small></span><b>›</b></button><label class="file-label"><span class="setting-icon">↑</span><span><strong>Import backup</strong><small>Restore PocketPal data</small></span><b>›</b><input id="importData" type="file" accept="application/json"></label><button class="danger-row" id="clearData"><span class="setting-icon">×</span><span><strong>Clear all data</strong><small>This cannot be undone</small></span><b>›</b></button></article></section>
+        <p class="about">PocketPal v1.0.0<br>Private by design. Your financial data stays on this device.</p>
+      </section>
+    </main>
+    <button class="fab" id="fab" aria-label="Add transaction"><span>+</span></button>
+    <nav class="bottom-nav" aria-label="Main navigation"><button class="active" data-nav="home" aria-label="Home"><i>⌂</i><span>Home</span></button><button data-nav="transactions" aria-label="Transactions"><i>≡</i><span>Activity</span></button><button data-nav="analytics" aria-label="Analytics"><i>◔</i><span>Insights</span></button><button data-nav="goals" aria-label="Goals"><i>◎</i><span>Goals</span></button><button data-nav="profile" aria-label="Profile"><i>♙</i><span>Profile</span></button></nav>
+  </div>
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div id="modalContent"></div></section></div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

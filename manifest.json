@@ -1,0 +1,10 @@
+{
+  "name": "PocketPal — Personal Finance",
+  "short_name": "PocketPal",
+  "description": "A private, local-first personal finance tracker.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#6366F1",
+  "icons": [{"src":"assets/icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
