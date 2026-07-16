@@ -13,22 +13,6 @@ PocketPal is a polished, privacy-first personal finance Progressive Web App buil
 - LocalStorage persistence and a service worker for offline caching after first visit
 - Installable PWA manifest with a custom vector app icon
 
-## Screenshots
-
-Open `index.html` in a browser to view the responsive dashboard, activity, insights, goals, and profile screens. The UI is intentionally designed to adapt from phone to desktop without separate builds.
-
-## Run locally
-
-No installation is necessary. Double-click `index.html`, or serve this folder with any static file server for the complete PWA experience. Chart.js and Inter load from their CDN; the app itself remains fully usable with locally stored data.
-
-> Service workers require `https` or `localhost`, so offline installability is available when hosted (including GitHub Pages), rather than from a `file://` URL.
-
-## Deploy to GitHub Pages
-
-1. Push these files to a GitHub repository.
-2. In **Settings → Pages**, select **Deploy from a branch**.
-3. Choose your deployment branch and the repository root, then save.
-4. Open the generated GitHub Pages URL and use your browser’s install option to add PocketPal to your device.
 
 ## Folder structure
 
